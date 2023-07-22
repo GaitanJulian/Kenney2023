@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 3756405210985738923}
   m_Layer: 0
   m_Name: Main Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -616,6 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d929188767bb8db4ba5762588057d7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lastcheckpoint: {fileID: 0}
   _moveSpeed: 3
   _rotateSpeed: 5
 --- !u!1 &3756405212550755005
@@ -2190,6 +2191,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bec32527f8424e144911e03bf3832db8, type: 3}
       propertyPath: m_Name
       value: wholerHam
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bec32527f8424e144911e03bf3832db8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bec32527f8424e144911e03bf3832db8, type: 3}
