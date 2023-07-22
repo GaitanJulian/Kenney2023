@@ -8,6 +8,8 @@ public class TopDownViewCharacterController : MonoBehaviour
 {
     private PlayerInputActions _playerControls; // New Input system
 
+    private Animator _animator;
+
     private InputAction _move;
 
     private Vector2 _playerMovementInput;
@@ -17,6 +19,7 @@ public class TopDownViewCharacterController : MonoBehaviour
     private void Awake()
     {
         _playerControls = new PlayerInputActions();
+        _animator = GetComponent<Animator>();
     }
 
 
@@ -35,6 +38,15 @@ public class TopDownViewCharacterController : MonoBehaviour
     void Update()
     {
         _playerMovementInput = _move.ReadValue<Vector2>();
+
+        if (_playerMovementInput.magnitude >= 0.1f)
+        {
+            _animator.SetBool("Run",true);
+        }
+        else
+        {
+            _animator.SetBool("Run", false);
+        }
         
         var _movementTarget = new Vector3 (_playerMovementInput.x, 0 , _playerMovementInput.y);
 
