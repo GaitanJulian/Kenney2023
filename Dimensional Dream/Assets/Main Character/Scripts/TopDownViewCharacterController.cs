@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class TopDownViewCharacterController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class TopDownViewCharacterController : MonoBehaviour
     private InputAction _move;
 
     private Vector2 _playerMovementInput;
+
+    public Transform _lastcheckpoint;
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotateSpeed;
@@ -34,6 +37,11 @@ public class TopDownViewCharacterController : MonoBehaviour
         _move.Disable();
     }
 
+    private void Start()
+    {
+        _lastcheckpoint = transform;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -53,6 +61,8 @@ public class TopDownViewCharacterController : MonoBehaviour
         var _movementVector = MoveTowardsTarget(_movementTarget);
 
         RotateTowardsMovementVector(_movementVector);
+
+        CheckIfPlayerFalled();
     }
 
     private void RotateTowardsMovementVector(Vector3 _movementVector)
@@ -74,6 +84,20 @@ public class TopDownViewCharacterController : MonoBehaviour
         transform.position = _targetPoistion;
 
         return _target;
+    }
+
+
+    private void CheckIfPlayerFalled()
+    {
+        if (transform.position.y <= -5f)
+        {
+            transform.position = _lastcheckpoint.position;
+        }
+    }
+
+    public void SetCheckPoint(Transform _transform)
+    {
+        _lastcheckpoint = _transform;
     }
 
 }
