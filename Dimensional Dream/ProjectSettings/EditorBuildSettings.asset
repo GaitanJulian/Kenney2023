@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DreamTown.unity
     guid: 1cade3937528ca44a9e9b0b32afbc3fa
+  - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: 965074ea26ef8b14a91e08985f463df8
   m_configObjects: {}

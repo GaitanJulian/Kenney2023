@@ -7,7 +7,7 @@ using DG.Tweening;
 public class ButtonBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public float fadeDuration = 0.2f;
-
+    public string Scene;
     private Image buttonImage;
     private Color originalColor;
 
@@ -32,7 +32,7 @@ public class ButtonBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void LoadMainGameScene()
     {
         // Load the main game scene when the button is clicked
-        SceneManager.LoadScene("DreamWorld");
+        SceneManager.LoadScene(Scene);
     }
 }
 

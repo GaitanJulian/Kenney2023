@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 7c2f598f33c67b446b86d0b024cbd6c3
+guid: d27c071f49d03c746a444f53a79849d1
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -2
+  forceTextureCase: 0
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Kenney Mini Square
+  - Kenney High
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

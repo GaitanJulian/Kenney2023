@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 66aa9a3a241c16942a6eecd217be409c
+guid: 73bcc4d8cb5b86d409504590c4edfb60
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -2
+  forceTextureCase: 0
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Kenney Rocket
+  - Kenney Mini Square Mono
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

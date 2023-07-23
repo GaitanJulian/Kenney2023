@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: fcbedcc6c8c03f34daff3b9f0d624710
+guid: 7723bd84612e88b45887c37285df20ee
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -2
+  forceTextureCase: 0
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Kenney Rocket Square
+  - Kenney Pixel Square
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -53,6 +53,6 @@ public class TransitionScript : MonoBehaviour
     public void LoadNextScene()
     {
         // Load the next scene
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("CreditsScene");
     }
 }

@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 6b22a4288eb0786499b9aa17df677602
+guid: bc811f372a7a1b84bb53cf14c35ac0eb
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -2
+  forceTextureCase: 0
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Kenney Pixel
+  - Kenney High Square
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
