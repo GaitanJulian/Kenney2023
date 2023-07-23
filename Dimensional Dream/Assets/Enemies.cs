@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemies : MonoBehaviour
@@ -9,9 +10,13 @@ public class Enemies : MonoBehaviour
     public float detectionRange = 5f;
     public float knockbackForce = 5f;
     public float KnockbackDistance = 0.5f;
+    public int hitcount = 3;
 
     private Transform player;
     private bool isPlayerDetected = false;
+
+    // Add a Coroutine reference to handle knockback
+    private Coroutine knockbackCoroutine;
 
     void Start()
     {
@@ -25,14 +30,16 @@ public class Enemies : MonoBehaviour
             RotateTowardsPlayer();
             MoveTowardsPlayer();
         }
+
+        if ( hitcount <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void PlayerDetected()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerDetected = true;
-        }
+        isPlayerDetected = true;
     }
 
     
@@ -51,19 +58,40 @@ public class Enemies : MonoBehaviour
 
         float distanceToPlayer = directionToPlayer.magnitude;
 
-        if (distanceToPlayer > KnockbackDistance)
-        {
             directionToPlayer.Normalize();
             transform.position += directionToPlayer * movementSpeed * Time.deltaTime;
         }
-        else
+
+
+
+    // Method to initiate knockback coroutine
+    public void StartKnockback(Vector3 knockbackDirection)
+    {
+        if (knockbackCoroutine == null)
         {
-            // Apply knockback to the player
-            Vector3 knockbackDirection = directionToPlayer;
-            knockbackDirection.y = 0f;
-            player.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+            knockbackCoroutine = StartCoroutine(KnockbackCoroutine(knockbackDirection));
+            hitcount--;
         }
-        }
+    }
 
+    // Coroutine to handle knockback
+    private IEnumerator KnockbackCoroutine(Vector3 knockbackDirection)
+    {
+        // Stop enemy movement during knockback
+        isPlayerDetected = false;
 
+        // Apply knockback to the enemy
+        Vector3 knockbackVelocity = knockbackDirection.normalized * knockbackForce;
+        GetComponent<Rigidbody>().velocity = knockbackVelocity;
+
+        // Wait for a short duration to apply the knockback effect
+        yield return new WaitForSeconds(0.5f);
+
+        // Reset enemy velocity and resume movement
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        isPlayerDetected = true;
+
+        // Reset the knockback coroutine reference
+        knockbackCoroutine = null;
+    }
 }

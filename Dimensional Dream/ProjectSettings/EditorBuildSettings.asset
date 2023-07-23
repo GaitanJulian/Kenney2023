@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/MainMenu.unity
+    guid: f293a65b6a969924ea1422e13dbff2cc
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/DreamWorld.unity
+    guid: 9e56ab8f3d30df8478d6cd3f2da05e33
+  - enabled: 1
+    path: Assets/Scenes/DreamTown.unity
+    guid: 1cade3937528ca44a9e9b0b32afbc3fa
   m_configObjects: {}
