@@ -13,12 +13,16 @@ public class TopDownViewCharacterController : MonoBehaviour
 
     private AnimationClip standingUpAnimationClip; // Reference to the "standing_up" animation clip
 
-
+    public bool _canHit = false;
 
     private Animator _animator;
 
     private InputAction _move;
     private InputAction _attack;
+
+    public float attackRange = 1.5f;
+    public LayerMask enemyLayer;
+    public LayerMask breakableLayer;
 
     private Vector2 _playerMovementInput;
 
@@ -26,6 +30,9 @@ public class TopDownViewCharacterController : MonoBehaviour
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotateSpeed;
+
+    private bool _canAttack = true;
+    private float _attackCooldown = 1.0f; // The time in seconds between attacks
     private void Awake()
     {
         _playerControls = new PlayerInputActions();
@@ -95,15 +102,44 @@ public class TopDownViewCharacterController : MonoBehaviour
 
             CheckIfPlayerFalled();
 
-            if (_attack.WasPressedThisFrame())
+            if (_attack.WasPressedThisFrame() && _canHit && _canAttack)
             {
+                // Check for enemy within the attack range
+                Collider[] hitEnemies = Physics.OverlapSphere(transform.position + transform.forward, attackRange, enemyLayer);
+                Collider[] hitBreakeable = Physics.OverlapSphere(transform.position + transform.forward, attackRange, breakableLayer);
                 _animator.SetTrigger("heavy");
+                _canAttack = false; // Disable attack until the cooldown is over
+                StartCoroutine(AttackCooldown());
+
+                // Call StartKnockback on each hit enemy with the knockback direction
+                foreach (Collider enemyCollider in hitEnemies)
+                {
+                    Enemies enemy = enemyCollider.GetComponent<Enemies>();
+                    if (enemy != null)
+                    {
+                        Vector3 knockbackDirection = enemy.transform.position - transform.position;
+                        knockbackDirection.y = 0f;
+                        enemy.StartKnockback(knockbackDirection);
+                    }
+                }
+
+                foreach (Collider breakeableCollider in hitBreakeable)
+                {
+                    Breakeable breakeable = breakeableCollider.GetComponent<Breakeable>();
+                    if (breakeable != null)
+                    {
+                        breakeable.BreakObject();
+                    }
+                }
+
             }
 
         }
 
+        
 
- 
+
+
     }
 
     private void RotateTowardsMovementVector(Vector3 _movementVector)
@@ -148,5 +184,23 @@ public class TopDownViewCharacterController : MonoBehaviour
         // Set the "FinishStandup" parameter to true to signal that the animation is complete.
         _animator.SetBool("finishStandup", true);
     }
-      
+    
+    public void ToggleAttack()
+    {
+        _canHit = true;
+    }
+
+    // Coroutine to reset the attack cooldown
+    private IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(_attackCooldown);
+        _canAttack = true; // Enable attack again after the cooldown
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize the attack range region in the Unity Editor
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + transform.forward, attackRange);
+    }
 }
