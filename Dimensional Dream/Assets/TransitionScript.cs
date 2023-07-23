@@ -37,8 +37,8 @@ public class TransitionScript : MonoBehaviour
     {
         overlayImage.gameObject.SetActive(true);
 
-        // Set the overlay color to transparent (full alpha)
-        overlayImage.color = Color.clear;
+        // Set the overlay color to fully transparent (clear)
+        overlayImage.color = new Color(1f, 1f, 1f, 0f);
 
         // Use DoTween to fade in the overlay's alpha value to 1 over the specified duration
         overlayImage.DOFade(1.0f, fadeInDuration).OnComplete(OnFadeInWhiteComplete);
